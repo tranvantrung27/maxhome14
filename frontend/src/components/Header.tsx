@@ -8,9 +8,9 @@ const Header = () => {
       <div className="header-top">
         <div className="container">
           <div className="header-top-content">
-            <Link to="/" className="logo">
-              <img src="assets/logo/maxhome14.png" alt="MAXHOME14 Logo" />
-            </Link>
+                           <Link to="/" className="logo">
+                 <img src="/assets/logo/maxhome14.svg" alt="MAXHOME14 Logo" />
+               </Link>
             <div className="header-info">
                              <div className="address">
                  <i className="fas fa-map-marker-alt"></i>
