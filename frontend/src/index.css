@@ -48,6 +48,25 @@ body {
   line-height: 1.6;
   color: var(--text-dark);
   background-color: var(--primary-white);
+  padding-top: 150px; /* Tăng lên 200px để hoàn toàn không bị che */
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Responsive padding cho fixed header */
+@media (max-width: 768px) {
+  body {
+    padding-top: 200px; /* Mobile: Tăng thêm để match desktop */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 220px; /* Mobile nhỏ: Tăng thêm để không bị che */
+  }
 }
 
 #root {

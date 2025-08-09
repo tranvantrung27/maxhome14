@@ -1,47 +1,148 @@
 .header {
   background-color: var(--primary-white);
   box-shadow: var(--shadow-light);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Thanh trên: Logo + Địa chỉ + Gọi ngay */
+.header-visible {
+  transform: translateY(0);
+}
+
+.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* Thanh trên: Logo + Search + Phone numbers */
 .header-top {
   background-color: var(--primary-white);
   border-bottom: 1px solid var(--border-light);
-  padding: var(--spacing-sm) 0;
+  padding: var(--spacing-lg) 0;
 }
 
 .header-top-content {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.header-info {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: var(--spacing-xl);
 }
 
-.address {
+/* Logo trong header-top */
+.header-top .logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header-top .logo img {
+  height: 50px;
+  width: auto;
+  max-width: 200px;
+}
+
+/* Search Container */
+.search-container {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 var(--spacing-xl);
+}
+
+.search-wrapper {
+  display: flex;
+  background: var(--background-light);
+  border: 2px solid var(--border-light);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.search-wrapper:focus-within {
+  border-color: var(--primary-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.search-input {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  background: transparent;
+  font-size: var(--font-size-normal);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-light);
+}
+
+.search-button {
+  background: var(--primary-gold);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--primary-white);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  min-width: 50px;
+}
+
+.search-button:hover {
+  background: var(--dark-gold);
+}
+
+/* Phone Numbers */
+.phone-numbers {
+  display: flex;
+  gap: var(--spacing-lg);
+  flex-shrink: 0;
+}
+
+.phone-item {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  color: var(--text-light);
-  font-size: var(--font-size-small);
 }
 
-.address i {
+.phone-item i {
   color: var(--primary-gold);
-  font-size: 14px;
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.phone-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.phone-label {
+  font-size: var(--font-size-small);
+  color: var(--text-light);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.phone-number {
+  font-size: var(--font-size-normal);
+  font-weight: 700;
+  color: var(--primary-gold);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.phone-number:hover {
+  color: var(--dark-gold);
 }
 
 /* Thanh dưới: Menu chức năng */
 .header-bottom {
   background: linear-gradient(135deg, var(--primary-white) 0%, var(--background-light) 100%);
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-md) 0;
   border-bottom: 2px solid var(--primary-gold);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -58,13 +159,12 @@
   max-width: 200px;
 }
 
-/* Navigation Container - Layout 3 cột */
+/* Navigation Container - Full width for menu */
 .nav-container {
   position: relative;
-  display: grid;
-  grid-template-columns: 200px 1fr 200px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: var(--spacing-lg);
 }
 
 /* Desktop Navigation */
@@ -73,7 +173,7 @@
   justify-content: center;
   align-items: center;
   gap: var(--spacing-lg);
-  flex-wrap: wrap;
+  flex: 1;
 }
 
 /* Mobile Menu Toggle Button */
@@ -140,13 +240,18 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 1000;
+  z-index: -1;
   transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .mobile-nav.open {
+  z-index: 9999;
   transform: translateX(0);
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .mobile-nav-overlay {
@@ -167,10 +272,41 @@
   height: 100%;
   background-color: var(--primary-white);
   box-shadow: var(--shadow-medium);
-  padding: var(--spacing-xl) 0 var(--spacing-xl) 0;
+  padding: var(--spacing-lg) 0 var(--spacing-xl) 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+}
+
+/* Close Button */
+.mobile-nav-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  font-size: 20px;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.mobile-nav-close:hover {
+  background-color: var(--background-light);
+  color: var(--primary-gold);
+  transform: rotate(90deg);
+}
+
+.mobile-nav-close:active {
+  transform: rotate(90deg) scale(0.95);
 }
 
 .mobile-nav-link {
@@ -184,6 +320,11 @@
   border-bottom: 1px solid var(--border-light);
   min-height: 60px; /* Touch target 60px cho mobile */
   font-size: var(--font-size-medium);
+  margin-top: var(--spacing-sm); /* Để tránh che bởi close button */
+}
+
+.mobile-nav-link:first-of-type {
+  margin-top: var(--spacing-xxl); /* First item có margin lớn hơn */
 }
 
 .mobile-nav-link:hover {
@@ -332,7 +473,7 @@
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 600;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--border-radius-md);
   transition: all 0.3s ease;
   font-size: var(--font-size-small);
@@ -440,36 +581,52 @@
 }
 
 @media (max-width: 768px) {
-  /* Ẩn header top trên mobile để tiết kiệm không gian */
-  .header-top {
+  /* Header top responsive */
+  .header-top-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .header-top .logo img {
+    height: 40px;
+  }
+  
+  /* Search full width trên mobile */
+  .search-container {
+    order: 3;
+    margin: 0;
+    max-width: none;
+    width: 100%;
+  }
+  
+  /* Phone numbers in row */
+  .phone-numbers {
+    order: 2;
+    gap: var(--spacing-md);
+  }
+  
+  .phone-label {
     display: none;
   }
   
   /* Mobile-optimized header bottom */
   .header-bottom {
-    padding: var(--spacing-md) 0;
-    border-bottom: 3px solid var(--primary-gold); /* Đậm hơn trên mobile */
+    padding: var(--spacing-xs) 0;
+    border-bottom: 3px solid var(--primary-gold);
   }
   
-  /* Mobile layout: quay về flexbox */
+  /* Mobile navigation */
   .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 var(--spacing-sm); /* Thêm padding cho mobile */
+    padding: 0 var(--spacing-sm);
+    justify-content: flex-end; /* Hamburger menu ở bên phải */
   }
   
-  /* Ẩn desktop nav, hiện mobile toggle */
   .desktop-nav {
     display: none;
   }
   
-  .nav-phone-link {
-    display: none;
-  }
-  
   .mobile-menu-toggle {
-    display: flex; /* Đổi thành flex để center hamburger */
+    display: flex;
     align-items: center;
     justify-content: center;
   }
@@ -478,26 +635,23 @@
     display: block;
   }
   
-  /* Logo mobile-first */
-  .logo {
-    flex-shrink: 0; /* Không cho logo bị nén */
+  /* Đảm bảo mobile nav không ảnh hưởng khi không open */
+  .mobile-nav:not(.open) {
+    visibility: hidden;
   }
   
-  .logo img {
-    height: 40px; /* Tăng size logo trên mobile */
-  }
-  
-  /* Mobile nav content full width trên điện thoại nhỏ */
   .mobile-nav-content {
     width: 100%;
     max-width: 320px;
+    left: 0;
+    right: auto;
   }
 }
 
 /* Mobile nhỏ - Priority cho UX */
 @media (max-width: 480px) {
   .header-bottom {
-    padding: var(--spacing-lg) var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
   
   .nav-container {
@@ -507,6 +661,8 @@
   .mobile-nav-content {
     width: 100vw; /* Full viewport width */
     max-width: none;
+    left: 0;
+    right: auto;
   }
   
   .logo img {
@@ -556,5 +712,66 @@
     width: 45px;
     height: 45px;
     font-size: 16px;
+  }
+}
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-gold) 0%, #E6B800 100%);
+  border: none;
+  border-radius: 50%;
+  color: var(--primary-white);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  animation: fadeInUp 0.3s ease;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, #E6B800 0%, var(--primary-gold) 100%);
+}
+
+.back-to-top:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile optimization cho back to top */
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-to-top {
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
   }
 }
