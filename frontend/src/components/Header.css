@@ -15,7 +15,7 @@
 
 .header-top-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -40,8 +40,10 @@
 
 /* Thanh dưới: Menu chức năng */
 .header-bottom {
-  background-color: var(--background-light);
-  padding: var(--spacing-md) 0;
+  background: linear-gradient(135deg, var(--primary-white) 0%, var(--background-light) 100%);
+  padding: var(--spacing-lg) 0;
+  border-bottom: 2px solid var(--primary-gold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -56,19 +58,22 @@
   max-width: 200px;
 }
 
-/* Navigation Container */
+/* Navigation Container - Layout 3 cột */
 .nav-container {
   position: relative;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
   align-items: center;
+  gap: var(--spacing-lg);
 }
 
 /* Desktop Navigation */
 .main-nav {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-xl);
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
 }
 
 /* Mobile Menu Toggle Button */
@@ -77,10 +82,16 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: var(--spacing-sm);
-  position: absolute;
-  right: 0;
+  padding: var(--spacing-md);
   z-index: 1001;
+  min-width: 48px; /* Touch target tối thiểu 48px */
+  min-height: 48px;
+  border-radius: var(--border-radius-sm);
+  transition: background-color 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+  background-color: rgba(212, 175, 55, 0.1);
 }
 
 /* Hamburger Animation */
@@ -156,19 +167,23 @@
   height: 100%;
   background-color: var(--primary-white);
   box-shadow: var(--shadow-medium);
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-xl) 0 var(--spacing-xl) 0;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .mobile-nav-link {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
   text-decoration: none;
   color: var(--text-dark);
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: var(--spacing-lg) var(--spacing-xl);
   transition: all 0.3s ease;
   border-bottom: 1px solid var(--border-light);
+  min-height: 60px; /* Touch target 60px cho mobile */
+  font-size: var(--font-size-medium);
 }
 
 .mobile-nav-link:hover {
@@ -187,23 +202,165 @@
   font-size: var(--font-size-medium);
 }
 
+/* Mobile Phone CTA */
+.mobile-phone-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  text-decoration: none;
+  margin: auto var(--spacing-lg) var(--spacing-xl) var(--spacing-lg);
+  padding: var(--spacing-xl);
+  background: linear-gradient(135deg, var(--primary-gold) 0%, #E6B800 100%);
+  border-radius: var(--border-radius-lg);
+  color: var(--primary-white);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  min-height: 80px; /* Touch target lớn cho CTA quan trọng */
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-phone-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-phone-cta:hover::before {
+  opacity: 1;
+}
+
+.mobile-phone-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+  background: linear-gradient(135deg, #E6B800 0%, var(--primary-gold) 100%);
+}
+
+/* Pulse animation cho phone CTA */
+.mobile-phone-cta {
+  animation: phonePulse 3s infinite;
+}
+
+@keyframes phonePulse {
+  0%, 100% {
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4), 0 0 0 10px rgba(212, 175, 55, 0.1);
+  }
+}
+
+.mobile-phone-cta i {
+  background: rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-md);
+  border-radius: 50%;
+  font-size: 18px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-white);
+}
+
+.phone-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.phone-label {
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.phone-number {
+  font-size: var(--font-size-large);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Navigation Actions */
+.nav-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Desktop Phone Link */
+.nav-phone-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  color: var(--primary-white);
+  background: linear-gradient(135deg, var(--primary-gold) 0%, #E6B800 100%);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: var(--font-size-small);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);
+}
+
+.nav-phone-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, #E6B800 0%, var(--primary-gold) 100%);
+}
+
+.nav-phone-link i {
+  font-size: 14px;
+}
+
+.nav-phone-link span {
+  font-weight: 600;
+}
+
 .nav-link {
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 600;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-md);
   transition: all 0.3s ease;
-  text-transform: uppercase;
   font-size: var(--font-size-small);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-gold), #E6B800);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 .nav-link:hover {
   color: var(--primary-gold);
-  background-color: var(--primary-white);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-light);
+  background-color: rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+  width: 80%;
 }
 
 .phone-link {
@@ -236,8 +393,13 @@
   color: var(--primary-gold);
 }
 
-/* Tablet và Mobile breakpoints */
-@media (max-width: 992px) {
+/* Large tablet */
+@media (max-width: 1200px) {
+  .nav-container {
+    grid-template-columns: 180px 1fr 180px;
+    gap: var(--spacing-md);
+  }
+  
   .main-nav {
     gap: var(--spacing-md);
   }
@@ -248,27 +410,53 @@
   }
 }
 
-@media (max-width: 768px) {
-  .header-top-content {
-    flex-direction: column;
+/* Tablet */
+@media (max-width: 992px) {
+  .nav-container {
+    grid-template-columns: 150px 1fr 150px;
     gap: var(--spacing-sm);
   }
   
-  .header-info {
-    flex-direction: column;
+  .main-nav {
     gap: var(--spacing-sm);
   }
   
-  .address span {
+  .nav-link {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 12px;
+  }
+  
+  .nav-phone-link span {
     display: none;
   }
   
-  .phone-link span {
-    display: none;
-  }
-  
-  .phone-link {
+  .nav-phone-link {
     padding: var(--spacing-sm);
+    border-radius: 50%;
+    min-width: 40px;
+    min-height: 40px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Ẩn header top trên mobile để tiết kiệm không gian */
+  .header-top {
+    display: none;
+  }
+  
+  /* Mobile-optimized header bottom */
+  .header-bottom {
+    padding: var(--spacing-md) 0;
+    border-bottom: 3px solid var(--primary-gold); /* Đậm hơn trên mobile */
+  }
+  
+  /* Mobile layout: quay về flexbox */
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing-sm); /* Thêm padding cho mobile */
   }
   
   /* Ẩn desktop nav, hiện mobile toggle */
@@ -276,35 +464,97 @@
     display: none;
   }
   
+  .nav-phone-link {
+    display: none;
+  }
+  
   .mobile-menu-toggle {
-    display: block;
+    display: flex; /* Đổi thành flex để center hamburger */
+    align-items: center;
+    justify-content: center;
   }
   
   .mobile-nav {
     display: block;
   }
   
-  /* Điều chỉnh logo size trên mobile */
+  /* Logo mobile-first */
+  .logo {
+    flex-shrink: 0; /* Không cho logo bị nén */
+  }
+  
   .logo img {
-    height: 35px;
+    height: 40px; /* Tăng size logo trên mobile */
+  }
+  
+  /* Mobile nav content full width trên điện thoại nhỏ */
+  .mobile-nav-content {
+    width: 100%;
+    max-width: 320px;
   }
 }
 
-/* Mobile nhỏ */
+/* Mobile nhỏ - Priority cho UX */
 @media (max-width: 480px) {
-  .header-top {
-    padding: var(--spacing-xs) 0;
+  .header-bottom {
+    padding: var(--spacing-lg) var(--spacing-sm);
   }
   
-  .header-bottom {
-    padding: var(--spacing-sm) 0;
+  .nav-container {
+    padding: 0;
   }
   
   .mobile-nav-content {
-    width: 100%;
+    width: 100vw; /* Full viewport width */
+    max-width: none;
   }
   
   .logo img {
-    height: 30px;
+    height: 36px; /* Giữ logo đủ lớn để nhận diện */
+  }
+  
+  /* Hamburger lớn hơn cho thumb touch */
+  .hamburger {
+    width: 28px;
+    height: 22px;
+  }
+  
+  .hamburger span {
+    height: 4px; /* Đậm hơn cho dễ nhìn */
+  }
+  
+  /* Mobile phone CTA chiếm toàn bộ chiều rộng */
+  .mobile-phone-cta {
+    margin: auto var(--spacing-sm) var(--spacing-lg) var(--spacing-sm);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .phone-number {
+    font-size: 18px; /* Lớn hơn cho dễ đọc */
+  }
+}
+
+/* Mobile cực nhỏ */
+@media (max-width: 360px) {
+  .logo img {
+    height: 32px;
+  }
+  
+  .mobile-nav-link {
+    padding: var(--spacing-md) var(--spacing-md);
+    min-height: 56px;
+  }
+  
+  .mobile-phone-cta {
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  
+  .mobile-phone-cta i {
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
   }
 }
