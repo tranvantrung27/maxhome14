@@ -1,12 +1,29 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { NAV_ITEMS } from '../utils/constants'
 import './Header.css'
+
+// Helper function để lấy icon cho từng nav item
+const getIconForNavItem = (label: string): string => {
+  switch (label) {
+    case 'Trang chủ': return 'fa-home'
+    case 'Công trình thiết kế': return 'fa-drafting-compass'
+    case 'Công trình thi công': return 'fa-hard-hat'
+    case 'Giới thiệu': return 'fa-info-circle'
+    case 'Liên hệ': return 'fa-phone-alt'
+    default: return 'fa-circle'
+  }
+}
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [showBackToTop, setShowBackToTop] = useState(false)
+  
+  // DEBUG: Log NAV_ITEMS
+  console.log('DEBUG NAV_ITEMS:', NAV_ITEMS)
+  console.log('DEBUG item có submenu:', NAV_ITEMS.filter(item => item.submenu))
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -97,20 +114,12 @@ const Header = () => {
         </div>
       </div>
       
+      {/* Debug UI removed: test navigation and debug widgets were here */}
+      
              {/* Thanh dưới: Menu chức năng */}
        <div className="header-bottom">
          <div className="container">
            <div className="nav-container">
-             {/* Desktop Navigation - Full width */}
-             <nav className="main-nav desktop-nav">
-               <Link to="/" className="nav-link">Trang chủ</Link>
-               <Link to="/projects" className="nav-link">Công trình thiết kế</Link>
-               <Link to="/construction" className="nav-link">Công trình thi công</Link>
-               <Link to="/interior" className="nav-link">Nội thất</Link>
-               <Link to="/about" className="nav-link">Giới thiệu</Link>
-               <Link to="/contact" className="nav-link">Liên hệ</Link>
-             </nav>
-
              {/* Mobile Hamburger Menu Button */}
              <button 
                className="mobile-menu-toggle"
@@ -134,30 +143,12 @@ const Header = () => {
                  <i className="fas fa-times"></i>
                </button>
                
-               <Link to="/" className="mobile-nav-link" onClick={closeMobileMenu}>
-                 <i className="fas fa-home"></i>
-                 <span>Trang chủ</span>
-               </Link>
-               <Link to="/projects" className="mobile-nav-link" onClick={closeMobileMenu}>
-                 <i className="fas fa-drafting-compass"></i>
-                 <span>Công trình thiết kế</span>
-               </Link>
-               <Link to="/construction" className="mobile-nav-link" onClick={closeMobileMenu}>
-                 <i className="fas fa-hard-hat"></i>
-                 <span>Công trình thi công</span>
-               </Link>
-               <Link to="/interior" className="mobile-nav-link" onClick={closeMobileMenu}>
-                 <i className="fas fa-couch"></i>
-                 <span>Nội thất</span>
-               </Link>
-               <Link to="/about" className="mobile-nav-link" onClick={closeMobileMenu}>
-                 <i className="fas fa-info-circle"></i>
-                 <span>Giới thiệu</span>
-               </Link>
-               <Link to="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>
-                 <i className="fas fa-phone-alt"></i>
-                 <span>Liên hệ</span>
-               </Link>
+                             {NAV_ITEMS.map((item, index) => (
+                <Link key={index} to={item.path} className="mobile-nav-link" onClick={closeMobileMenu}>
+                  <i className={`fas ${getIconForNavItem(item.label)}`}></i>
+                  <span>{item.label}</span>
+                </Link>
+              ))}
                
                {/* Phone CTA trong mobile menu */}
                <a href="tel:0979808278" className="mobile-phone-cta" onClick={closeMobileMenu}>

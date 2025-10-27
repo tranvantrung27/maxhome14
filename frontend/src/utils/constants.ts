@@ -7,6 +7,23 @@ export const API_CONFIG = {
 // Navigation
 export const NAV_ITEMS = [
   { label: 'Trang chủ', path: '/' },
+  { 
+    label: 'Công trình thiết kế', 
+    path: '/projects/design',
+    submenu: [
+      { 
+        label: 'Thiết kế nhà vườn', 
+        path: '/design/garden-house',
+        submenu: [
+          { label: 'Nhà vườn cấp 4/nhà 1 tầng', path: '/design/garden-house/single-floor' },
+          { label: 'Nhà ở 2 tầng', path: '/design/garden-house/two-floor' },
+          { label: 'Nhà ở nhiều tầng', path: '/design/garden-house/multi-floor' }
+        ]
+      },
+      { label: 'Thiết kế nhà phố', path: '/design/townhouse' }
+    ]
+  },
+  { label: 'Công trình thi công', path: '/projects/construction' },
   { label: 'Giới thiệu', path: '/about' },
   { label: 'Liên hệ', path: '/contact' },
 ]
