@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MAXHOME14</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2/dist/aos.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/components/header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/maxhome14.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --primary-white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --background-light: #F8F9FA;
+            --border-light: #E9ECEF;
+            --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-medium: 0 4px 8px rgba(0,0,0,0.15);
+            --shadow-heavy: 0 8px 16px rgba(0,0,0,0.2);
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            --font-size-small: 12px;
+            --font-size-normal: 14px;
+            --font-size-medium: 16px;
+            --font-size-large: 18px;
+            --font-size-xl: 24px;
+            --font-size-xxl: 32px;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--primary-white);
+        }
+        
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="layout-root">
+    <!-- Header -->
+    <header class="header">
+        <!-- Top Bar: Logo + Search + Phone -->
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <!-- Logo -->
+                    <a asp-controller="Home" asp-action="Index" class="logo">
+                        <img src="~/assets/logos/maxhome14.png" alt="MAXHOME14 Logo" />
+                    </a>
+
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <div class="search-wrapper">
+                            <input type="text" placeholder="Tìm kiếm..." class="search-input" />
+                            <button class="search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Phone Numbers -->
+                    <div class="phone-numbers">
+                        <div class="phone-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="phone-info">
+                                <span class="phone-label">24/7</span>
+                                <a href="tel:0927748888" class="phone-number">092.774.8888</a>
+                            </div>
+                        </div>
+                        <div class="phone-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="phone-info">
+                                <span class="phone-label">Hotline</span>
+                                <a href="tel:0929245555" class="phone-number">092.924.5555</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <div class="header-bottom">
+            <div class="container">
+                <div class="nav-container">
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </button>
+                    
+                    <!-- Desktop Navigation -->
+                    <nav class="main-nav desktop-nav">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Trang chủ
+                        </a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fas fa-drafting-compass"></i>
+                                Công trình thiết kế
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="CongTrinhThietKe">Thiết kế nhà ở</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="CongTrinhThietKe">Thiết kế văn phòng</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="CongTrinhThietKe">Thiết kế nội thất</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fas fa-hard-hat"></i>
+                                Công trình thi công
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="CongTrinhThiCong">Xây dựng nhà ở</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="CongTrinhThiCong">Sửa chữa nhà</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="CongTrinhThiCong">Cải tạo nội thất</a></li>
+                            </ul>
+                        </div>
+                        <a asp-controller="Home" asp-action="NoiThat" class="nav-link">
+                            <i class="fas fa-couch"></i>
+                            Nội thất
+                        </a>
+                        <a asp-controller="Home" asp-action="GioiThieu" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            Giới thiệu
+                        </a>
+                        <a asp-controller="Home" asp-action="LienHe" class="nav-link">
+                            <i class="fas fa-phone-alt"></i>
+                            Liên hệ
+                        </a>
+                    </nav>
+                    
+                    <!-- Mobile Navigation -->
+                    <div class="collapse mobile-nav" id="mobileNav">
+                        <div class="mobile-nav-content">
+                            <a asp-controller="Home" asp-action="Index" class="mobile-nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Trang chủ</span>
+                            </a>
+                            <a asp-controller="Home" asp-action="CongTrinhThietKe" class="mobile-nav-link">
+                                <i class="fas fa-drafting-compass"></i>
+                                <span>Công trình thiết kế</span>
+                            </a>
+                            <a asp-controller="Home" asp-action="CongTrinhThiCong" class="mobile-nav-link">
+                                <i class="fas fa-hard-hat"></i>
+                                <span>Công trình thi công</span>
+                            </a>
+                            <a asp-controller="Home" asp-action="NoiThat" class="mobile-nav-link">
+                                <i class="fas fa-couch"></i>
+                                <span>Nội thất</span>
+                            </a>
+                            <a asp-controller="Home" asp-action="GioiThieu" class="mobile-nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Giới thiệu</span>
+                            </a>
+                            <a asp-controller="Home" asp-action="LienHe" class="mobile-nav-link">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>Liên hệ</span>
+                            </a>
+                            
+                            <!-- Mobile Phone CTA -->
+                            <a href="tel:0927748888" class="mobile-phone-cta">
+                                <i class="fas fa-phone"></i>
+                                <div class="phone-info">
+                                    <span class="phone-label">Hotline</span>
+                                    <span class="phone-number">092.774.8888</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="main-content">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 MAXHOME14. Tất cả quyền được bảo lưu.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    
+    <!-- AOS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2/dist/aos.js"></script>
+    
+    <!-- Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 700,
+            offset: 80
+        });
+        
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Back to top functionality
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Header scroll effect
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('.header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+    </script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

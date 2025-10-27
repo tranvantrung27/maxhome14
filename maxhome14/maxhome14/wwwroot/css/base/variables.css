@@ -1,0 +1,97 @@
+/* ========================================
+   CSS VARIABLES - MAXHOME14
+   ======================================== */
+
+:root {
+  /* Colors */
+  --primary-gold: #D4AF37;
+  --dark-gold: #B8941F;
+  --light-gold: #F4E4BC;
+  --primary-white: #FFFFFF;
+  --text-dark: #2C3E50;
+  --text-light: #7F8C8D;
+  --text-muted: #95A5A6;
+  --background-light: #F8F9FA;
+  --background-dark: #2C3E50;
+  --border-light: #E9ECEF;
+  --border-medium: #DEE2E6;
+  --border-dark: #ADB5BD;
+  
+  /* Shadows */
+  --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-medium: 0 4px 8px rgba(0,0,0,0.15);
+  --shadow-heavy: 0 8px 16px rgba(0,0,0,0.2);
+  --shadow-gold: 0 4px 12px rgba(212, 175, 55, 0.3);
+  
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-full: 50%;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-xxxl: 64px;
+  
+  /* Font Sizes */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-xxxl: 48px;
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+  
+  /* Component Specific Z-Index */
+  --z-header: var(--z-fixed);
+  --z-mobile-menu: 9999;
+  --z-back-to-top: var(--z-fixed);
+  
+  /* Breakpoints (for JS) */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-white: #1A1A1A;
+    --text-dark: #FFFFFF;
+    --text-light: #B0B0B0;
+    --background-light: #2A2A2A;
+    --border-light: #404040;
+  }
+}
