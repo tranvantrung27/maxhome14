@@ -181,7 +181,7 @@ const Header = () => {
                          <Link 
                            to={item.path}
                            className={`nav-link dropdown-toggle ${isActiveRoute(item.path) ? 'active' : ''}`}
-                           onClick={(e) => {
+                           onClick={() => {
                              // KHÔNG prevent default - cho phép navigate đến trang cha
                              // Chỉ toggle dropdown khi cần thiết
                              handleDropdownToggle(item.label)
