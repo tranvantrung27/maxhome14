@@ -11,5 +11,9 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true
+  },
+  preview: {
+    port: 10000, 
+    allowedHosts: ['maxhome-14.onrender.com']
   }
 })
