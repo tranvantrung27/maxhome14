@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { NAV_ITEMS } from '../utils/constants'
 import './Header.css'
@@ -9,6 +9,7 @@ const getIconForNavItem = (label: string): string => {
     case 'Trang chủ': return 'fa-home'
     case 'Công trình thiết kế': return 'fa-drafting-compass'
     case 'Công trình thi công': return 'fa-hard-hat'
+    case 'Nội thất': return 'fa-couch'
     case 'Giới thiệu': return 'fa-info-circle'
     case 'Liên hệ': return 'fa-phone-alt'
     default: return 'fa-circle'
@@ -20,10 +21,14 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null)
+  const location = useLocation()
   
   // DEBUG: Log NAV_ITEMS
   console.log('DEBUG NAV_ITEMS:', NAV_ITEMS)
   console.log('DEBUG item có submenu:', NAV_ITEMS.filter(item => item.submenu))
+  console.log('DEBUG current location:', location.pathname)
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -33,11 +38,48 @@ const Header = () => {
     setIsMobileMenuOpen(false)
   }
 
+  const handleDropdownToggle = (label: string) => {
+    setActiveDropdown(activeDropdown === label ? null : label)
+  }
+
+  const handleDropdownClose = () => {
+    setActiveDropdown(null)
+  }
+
+  // Hover delay functions
+  const handleDropdownEnter = (label: string) => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+      setHoverTimeout(null)
+    }
+    setActiveDropdown(label)
+  }
+
+  const handleDropdownLeave = () => {
+    const timeout = setTimeout(() => {
+      setActiveDropdown(null)
+    }, 150) // 150ms delay
+    setHoverTimeout(timeout as unknown as number)
+  }
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     })
+  }
+
+  // Function để check active state
+  const isActiveRoute = (path: string) => {
+    const currentPath = location.pathname
+    
+    // Trang chủ chỉ active khi đúng '/'
+    if (path === '/') {
+      return currentPath === '/'
+    }
+    
+    // Các trang khác active khi exact match
+    return currentPath === path
   }
 
   useEffect(() => {
@@ -64,8 +106,12 @@ const Header = () => {
     
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      // Cleanup timeout
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout)
+      }
     }
-  }, [lastScrollY])
+  }, [lastScrollY, hoverTimeout])
 
   return (
     <>
@@ -99,14 +145,14 @@ const Header = () => {
                 <i className="fas fa-phone"></i>
                 <div className="phone-info">
                   <span className="phone-label">24/7</span>
-                  <a href="tel:0927748888" className="phone-number">092.774.8888</a>
+                  <a href="tel:0979808278" className="phone-number">0979 808 278</a>
                 </div>
               </div>
               <div className="phone-item">
                 <i className="fas fa-phone"></i>
                 <div className="phone-info">
                   <span className="phone-label">Hotline</span>
-                  <a href="tel:0929245555" className="phone-number">092.924.5555</a>
+                  <a href="tel:0979808278" className="phone-number">0979 808 278</a>
                 </div>
               </div>
             </div>
@@ -122,12 +168,58 @@ const Header = () => {
            <div className="nav-container">
              {/* Desktop Navigation */}
              <nav className="desktop-nav">
-               {NAV_ITEMS.map((item, index) => (
-                 <Link key={index} to={item.path} className="desktop-nav-link">
-                   <i className={`fas ${getIconForNavItem(item.label)}`}></i>
-                   <span>{item.label}</span>
-                 </Link>
-               ))}
+               {NAV_ITEMS.map((item, index) => {
+                 console.log('Rendering item:', item.label, 'Has submenu:', !!item.submenu)
+                 return (
+                   <div key={index} className="nav-item">
+                     {item.submenu ? (
+                       <div 
+                         className="dropdown-container"
+                         onMouseEnter={() => handleDropdownEnter(item.label)}
+                         onMouseLeave={handleDropdownLeave}
+                       >
+                         <Link 
+                           to={item.path}
+                           className={`nav-link dropdown-toggle ${isActiveRoute(item.path) ? 'active' : ''}`}
+                           onClick={(e) => {
+                             // KHÔNG prevent default - cho phép navigate đến trang cha
+                             // Chỉ toggle dropdown khi cần thiết
+                             handleDropdownToggle(item.label)
+                           }}
+                         >
+                           <i className={`fas ${getIconForNavItem(item.label)}`}></i>
+                           {item.label}
+                           <i className="fas fa-chevron-down"></i>
+                         </Link>
+                         
+                         {activeDropdown === item.label && (
+                           <ul className="dropdown-menu">
+                             {item.submenu.map((subItem, subIndex) => (
+                               <li key={subIndex}>
+                                 <Link
+                                   to={subItem.path}
+                                   className="dropdown-item"
+                                   onClick={handleDropdownClose}
+                                 >
+                                   {subItem.label}
+                                 </Link>
+                               </li>
+                             ))}
+                           </ul>
+                         )}
+                       </div>
+                     ) : (
+                       <Link 
+                         to={item.path} 
+                         className={`nav-link ${isActiveRoute(item.path) ? 'active' : ''}`}
+                       >
+                         <i className={`fas ${getIconForNavItem(item.label)}`}></i>
+                         {item.label}
+                       </Link>
+                     )}
+                   </div>
+                 )
+               })}
              </nav>
              
              {/* Mobile Hamburger Menu Button */}
@@ -154,7 +246,12 @@ const Header = () => {
                </button>
                
                              {NAV_ITEMS.map((item, index) => (
-                <Link key={index} to={item.path} className="mobile-nav-link" onClick={closeMobileMenu}>
+                <Link 
+                  key={index} 
+                  to={item.path} 
+                  className={`mobile-nav-link ${isActiveRoute(item.path) ? 'active' : ''}`} 
+                  onClick={closeMobileMenu}
+                >
                   <i className={`fas ${getIconForNavItem(item.label)}`}></i>
                   <span>{item.label}</span>
                 </Link>

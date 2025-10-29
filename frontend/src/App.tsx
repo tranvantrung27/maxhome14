@@ -22,6 +22,9 @@ function App() {
           <Route path="/gioi-thieu" element={<GioiThieuPage />} />
           <Route path="/lien-he" element={<LienHePage />} />
           <Route path="/noi-that" element={<NoiThatPage />} />
+          <Route path="/nha-vuon" element={<CongTrinhThietKePage />} />
+          <Route path="/nha-pho" element={<CongTrinhThietKePage />} />
+          <Route path="/biet-thu" element={<CongTrinhThietKePage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
       </main>

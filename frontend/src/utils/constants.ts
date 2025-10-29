@@ -9,21 +9,15 @@ export const NAV_ITEMS = [
   { label: 'Trang chủ', path: '/' },
   { 
     label: 'Công trình thiết kế', 
-    path: '/cong-trinh-thiet-ke',
+    path: '/cong-trinh-thiet-ke', // Có trang riêng nhưng chủ yếu để mở dropdown
     submenu: [
-      { 
-        label: 'Thiết kế nhà vườn', 
-        path: '/design/garden-house',
-        submenu: [
-          { label: 'Nhà vườn cấp 4/nhà 1 tầng', path: '/design/garden-house/single-floor' },
-          { label: 'Nhà ở 2 tầng', path: '/design/garden-house/two-floor' },
-          { label: 'Nhà ở nhiều tầng', path: '/design/garden-house/multi-floor' }
-        ]
-      },
-      { label: 'Thiết kế nhà phố', path: '/design/townhouse' }
+      { label: 'Nhà vườn', path: '/nha-vuon' },
+      { label: 'Nhà phố', path: '/nha-pho' },
+      { label: 'Biệt thự', path: '/biet-thu' }
     ]
   },
-  { label: 'Công trình thi công', path: '/cong-trinh-thi-cong' },
+  { label: 'Công trình thi công', path: '/cong-trinh-thi-cong' }, // Trang riêng, không có submenu
+  { label: 'Nội thất', path: '/noi-that' },
   { label: 'Giới thiệu', path: '/gioi-thieu' },
   { label: 'Liên hệ', path: '/lien-he' },
 ]

@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   /* MAXHOME14 Color Palette */
@@ -117,6 +115,13 @@ html {
   overflow-x: hidden; /* Ngăn scroll ngang cho container */
   overflow-y: visible; /* CHO PHÉP DROPDOWN HIỂN THỊ DỌC */
   box-sizing: border-box; /* Đảm bảo padding không làm tăng width */
+}
+
+/* QUAN TRỌNG: Container trong header phải overflow visible */
+.header .container {
+  overflow: visible !important;
+  position: relative; /* để z-index hoạt động nếu cần */
+  z-index: 1;
 }
 
 .btn {

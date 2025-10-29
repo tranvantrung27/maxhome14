@@ -41,28 +41,28 @@ const Footer = () => {
                   <i className="fas fa-map-marker-alt"></i>
                   <div>
                     <span className="contact-label">Địa chỉ:</span>
-                    <p>123 Đường ABC, Quận XYZ, TP.HCM</p>
+                    <p>37 Đường D3, Khu tái định cư Hố Lang,Khu phố Tân Hiệp,Phường Tân Đông Hiệp, Thành phố Hồ Chí Minh</p>
                   </div>
                 </div>
                 <div className="contact-item">
                   <i className="fas fa-phone"></i>
                   <div>
                     <span className="contact-label">Hotline:</span>
-                    <a href="tel:0927748888">092.774.8888</a>
+                    <a href="tel:0979808278">0979.808.278</a>
                   </div>
                 </div>
                 <div className="contact-item">
                   <i className="fas fa-phone"></i>
                   <div>
                     <span className="contact-label">Điện thoại:</span>
-                    <a href="tel:0929245555">092.924.5555</a>
+                    <a href="tel:0979808278">0979.808.278</a>
                   </div>
                 </div>
                 <div className="contact-item">
                   <i className="fas fa-envelope"></i>
                   <div>
                     <span className="contact-label">Email:</span>
-                    <a href="mailto:info@maxhome14.vn">info@maxhome14.vn</a>
+                    <a href="mailto:vpmaxhome14@gmail.com">vpmaxhome14@gmail.com</a>
                   </div>
                 </div>
                 <div className="contact-item">
